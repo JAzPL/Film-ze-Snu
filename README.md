@@ -1,6 +1,6 @@
 # Film-ze-Snu
 
-Dream Film is a fully multilingual web application written in PHP that transforms a user's dream description into a short multimedia film using artificial intelligence. The application uses Pollinations AI — a free AI platform with access to many models.
+Folm ze Snu is a fully multilingual web application written in PHP that transforms a user's dream description into a short multimedia film using artificial intelligence. The application uses Pollinations AI — a free AI platform with access to many models.
 <br><br>
 Open konfiguracja/klucz_api.php and insert your API key:
 <br><br>
