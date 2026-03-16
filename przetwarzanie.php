@@ -169,7 +169,45 @@ try {
             ]);
             break;
 
-        // ── KROK 6: Zapisz sen do publicznego archiwum ──
+        // ── DIAGNOSTYKA: sprawdzenie dostepnosci FFmpeg ──
+        case 'diagnostyka':
+            $ffmpeg  = trim((string) shell_exec('which ffmpeg 2>/dev/null'))
+                    ?: trim((string) shell_exec('where ffmpeg 2>nul'));
+            $ffprobe = trim((string) shell_exec('which ffprobe 2>/dev/null'))
+                    ?: trim((string) shell_exec('where ffprobe 2>nul'));
+
+            $wersja = '';
+            if ($ffmpeg) {
+                $wersja = trim((string) shell_exec(escapeshellarg($ffmpeg) . ' -version 2>&1 | head -1'));
+            }
+
+            odpowiedzJson([
+                'ffmpeg_dostepny'  => !empty($ffmpeg),
+                'ffmpeg_sciezka'   => $ffmpeg  ?: null,
+                'ffprobe_dostepny' => !empty($ffprobe),
+                'ffprobe_sciezka'  => $ffprobe ?: null,
+                'wersja'           => $wersja  ?: null,
+                'exec_dostepny'    => function_exists('exec') && !in_array('exec', array_map('trim', explode(',', ini_get('disable_functions')))),
+                'shell_dostepny'   => function_exists('shell_exec') && !in_array('shell_exec', array_map('trim', explode(',', ini_get('disable_functions')))),
+            ]);
+            break;
+
+        // ── KROK 6: Montaz finalnego filmu ──
+        case 'montaz':
+            $idProjektu = $wejscie['id_projektu'] ?? '';
+
+            walidujProjekt($idProjektu);
+            $generator->ustawProjekt($idProjektu);
+
+            $wynik = $generator->montujFilm();
+
+            odpowiedzJson([
+                'plik'    => $wynik['plik'],
+                'rozmiar' => $wynik['rozmiar'],
+            ]);
+            break;
+
+        // ── KROK 7: Zapisz sen do publicznego archiwum ──
         case 'zapisz':
             $idProjektu = $wejscie['id_projektu'] ?? '';
             $daneSnu    = $wejscie['dane_snu']    ?? [];
