@@ -419,10 +419,9 @@ $rok = date('Y');
 
             const czyWideo = generujWideo.checked;
 
-            // Oblicz max krokow: scenariusz(1) + na scene(obraz+narracja+muzyka[+wideo])
+            // Oblicz max krokow: scenariusz(1) + na scene(obraz+narracja+muzyka[+wideo]) + montaz(1) + zapisz(1)
             const krokiNaScene = czyWideo ? 4 : 3;
-            // Zakladamy 4 sceny + 1 krok zapisu
-            maxKrokow = 1 + (4 * krokiNaScene) + 1;
+            maxKrokow = 1 + (4 * krokiNaScene) + 1 + 1;
             licznikKrokow = 0;
 
             const postepKrok = () => {
@@ -522,6 +521,18 @@ $rok = date('Y');
                     }
 
                     daneFilmu.sceny.push(daneSceny);
+                }
+
+                // ── KROK MONTAZU ──
+                ustawPostep(postepKrok(), t('postep.montaz'));
+                try {
+                    const odpMontaz = await zapytanieApi({
+                        krok: 'montaz',
+                        id_projektu: idProjektu,
+                    });
+                    daneFilmu.filmFinalny = urlProjektu + '/' + odpMontaz.plik;
+                } catch (errMontaz) {
+                    ustawPostepBlad('⚠️ Montaz: ' + errMontaz.message);
                 }
 
                 // ── KROK ZAPISU ──
