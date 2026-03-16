@@ -53,6 +53,7 @@ return [
         'narracja'     => '🎤 Nagrywanie narracji sceny {numer}...',
         'muzyka'       => '🎵 Kompozycja muzyki sceny {numer}...',
         'wideo'        => '🎬 Renderowanie wideo sceny {numer}...',
+        'montaz'       => '🎞️ Montaz finalnego filmu...',
         'zapisz'       => '💾 Zapisywanie snu w archiwum...',
         'gotowe'       => '✅ Film gotowy!',
         'blad'         => '❌ Wystapil blad: {komunikat}',
