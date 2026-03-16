@@ -1,0 +1,189 @@
+/* ══════════════════════════════════════
+   Formularz opisu snu
+   ══════════════════════════════════════ */
+
+.formularz-snu {
+    background: var(--gradient-karta);
+    border: 1px solid var(--kolor-obramowanie);
+    border-radius: var(--zaokraglenie-xl);
+    padding: var(--odstep-xl);
+    box-shadow: var(--cien-lg);
+}
+
+.formularz-snu__tytul {
+    font-size: var(--rozmiar-xl);
+    font-weight: 700;
+    color: var(--kolor-tekst-naglowek);
+    margin-bottom: var(--odstep-lg);
+    text-align: center;
+}
+
+.formularz-snu__grupa {
+    margin-bottom: var(--odstep-lg);
+}
+
+.formularz-snu__etykieta {
+    display: block;
+    font-size: var(--rozmiar-sm);
+    color: var(--kolor-tekst-przygaszony);
+    margin-bottom: var(--odstep-sm);
+    font-weight: 500;
+}
+
+.formularz-snu__tekstarea {
+    width: 100%;
+    min-height: 180px;
+    padding: var(--odstep-md);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--kolor-obramowanie);
+    border-radius: var(--zaokraglenie-md);
+    color: var(--kolor-tekst);
+    font-family: var(--czcionka-glowna);
+    font-size: var(--rozmiar-md);
+    line-height: 1.6;
+    resize: vertical;
+    transition: border-color var(--przejscie), box-shadow var(--przejscie);
+}
+
+.formularz-snu__tekstarea:focus {
+    outline: none;
+    border-color: var(--kolor-akcent);
+    box-shadow: var(--cien-akcent);
+}
+
+.formularz-snu__tekstarea::placeholder {
+    color: var(--kolor-tekst-przygaszony);
+    opacity: 0.6;
+}
+
+/* Separator "lub" */
+.formularz-snu__separator {
+    display: flex;
+    align-items: center;
+    gap: var(--odstep-md);
+    margin: var(--odstep-lg) 0;
+    color: var(--kolor-tekst-przygaszony);
+    font-size: var(--rozmiar-sm);
+}
+
+.formularz-snu__separator::before,
+.formularz-snu__separator::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--kolor-obramowanie);
+}
+
+/* Przycisk nagrywania */
+.przycisk-nagrywania {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--odstep-sm);
+    width: 100%;
+    padding: var(--odstep-md) var(--odstep-lg);
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px dashed rgba(239, 68, 68, 0.4);
+    border-radius: var(--zaokraglenie-md);
+    color: #fca5a5;
+    cursor: pointer;
+    font-size: var(--rozmiar-md);
+    font-family: var(--czcionka-glowna);
+    transition: all var(--przejscie);
+}
+
+.przycisk-nagrywania:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.6);
+}
+
+.przycisk-nagrywania--aktywny {
+    background: rgba(239, 68, 68, 0.3);
+    border-style: solid;
+    animation: pulsuj 1.5s ease-in-out infinite;
+}
+
+@keyframes pulsuj {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* Opcje */
+.formularz-snu__opcje {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--odstep-md);
+    margin-bottom: var(--odstep-lg);
+}
+
+.formularz-snu__select {
+    width: 100%;
+    padding: var(--odstep-sm) var(--odstep-md);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--kolor-obramowanie);
+    border-radius: var(--zaokraglenie-md);
+    color: var(--kolor-tekst);
+    font-family: var(--czcionka-glowna);
+    font-size: var(--rozmiar-sm);
+    cursor: pointer;
+}
+
+.formularz-snu__checkbox-grupa {
+    display: flex;
+    align-items: center;
+    gap: var(--odstep-sm);
+    padding: var(--odstep-sm) var(--odstep-md);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--zaokraglenie-md);
+    cursor: pointer;
+}
+
+.formularz-snu__checkbox {
+    accent-color: var(--kolor-akcent);
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* Przycisk generowania */
+.przycisk-generuj {
+    display: block;
+    width: 100%;
+    padding: var(--odstep-md) var(--odstep-xl);
+    background: var(--gradient-przycisk);
+    border: none;
+    border-radius: var(--zaokraglenie-lg);
+    color: white;
+    font-family: var(--czcionka-glowna);
+    font-size: var(--rozmiar-lg);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--przejscie);
+    box-shadow: var(--cien-md);
+}
+
+.przycisk-generuj:hover:not(:disabled) {
+    background: var(--gradient-przycisk-hover);
+    box-shadow: var(--cien-lg), var(--cien-akcent);
+    transform: translateY(-1px);
+}
+
+.przycisk-generuj:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.przycisk-generuj:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+    .formularz-snu {
+        padding: var(--odstep-lg);
+        border-radius: var(--zaokraglenie-lg);
+    }
+
+    .formularz-snu__opcje {
+        grid-template-columns: 1fr;
+    }
+}

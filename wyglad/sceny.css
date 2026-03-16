@@ -1,0 +1,194 @@
+/* ══════════════════════════════════════
+   Karty scen — galeria filmowa
+   ══════════════════════════════════════ */
+
+.wynik-filmu {
+    display: none;
+    margin-top: var(--odstep-2xl);
+}
+
+.wynik-filmu--aktywny {
+    display: block;
+    animation: pokaz 0.6s ease;
+}
+
+/* Info o filmie */
+.film-info {
+    background: var(--gradient-karta);
+    border: 1px solid var(--kolor-obramowanie);
+    border-radius: var(--zaokraglenie-xl);
+    padding: var(--odstep-xl);
+    margin-bottom: var(--odstep-xl);
+    text-align: center;
+}
+
+.film-info__tytul {
+    font-size: var(--rozmiar-2xl);
+    font-weight: 800;
+    color: var(--kolor-tekst-naglowek);
+    margin-bottom: var(--odstep-sm);
+}
+
+.film-info__meta {
+    display: flex;
+    justify-content: center;
+    gap: var(--odstep-lg);
+    flex-wrap: wrap;
+    color: var(--kolor-tekst-przygaszony);
+    font-size: var(--rozmiar-sm);
+}
+
+.film-info__meta-element {
+    display: flex;
+    align-items: center;
+    gap: var(--odstep-xs);
+}
+
+/* Siatka scen */
+.sceny-siatka {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--odstep-xl);
+}
+
+/* Karta sceny */
+.scena-karta {
+    background: var(--gradient-karta);
+    border: 1px solid var(--kolor-obramowanie);
+    border-radius: var(--zaokraglenie-xl);
+    overflow: hidden;
+    transition: all var(--przejscie);
+    box-shadow: var(--cien-md);
+}
+
+.scena-karta:hover {
+    border-color: var(--kolor-obramowanie-aktywne);
+    box-shadow: var(--cien-lg), var(--cien-akcent);
+    transform: translateY(-2px);
+}
+
+.scena-karta__obraz-kontener {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.scena-karta__obraz {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--przejscie-wolne);
+}
+
+.scena-karta:hover .scena-karta__obraz {
+    transform: scale(1.03);
+}
+
+.scena-karta__numer {
+    position: absolute;
+    top: var(--odstep-md);
+    left: var(--odstep-md);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    padding: var(--odstep-xs) var(--odstep-md);
+    border-radius: var(--zaokraglenie-pelne);
+    font-size: var(--rozmiar-sm);
+    font-weight: 700;
+    color: var(--kolor-akcent-jasny);
+}
+
+.scena-karta__tresc {
+    padding: var(--odstep-lg);
+}
+
+.scena-karta__tytul {
+    font-size: var(--rozmiar-lg);
+    font-weight: 700;
+    color: var(--kolor-tekst-naglowek);
+    margin-bottom: var(--odstep-sm);
+}
+
+.scena-karta__narracja {
+    color: var(--kolor-tekst-przygaszony);
+    font-size: var(--rozmiar-sm);
+    line-height: 1.7;
+    margin-bottom: var(--odstep-lg);
+    font-style: italic;
+}
+
+/* Przyciski mediow */
+.scena-karta__media {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--odstep-sm);
+}
+
+.przycisk-media {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--odstep-xs);
+    padding: var(--odstep-xs) var(--odstep-md);
+    border: 1px solid var(--kolor-obramowanie);
+    border-radius: var(--zaokraglenie-pelne);
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--kolor-tekst);
+    font-size: var(--rozmiar-sm);
+    font-family: var(--czcionka-glowna);
+    cursor: pointer;
+    transition: all var(--przejscie);
+}
+
+.przycisk-media:hover {
+    background: rgba(124, 58, 237, 0.2);
+    border-color: var(--kolor-akcent);
+}
+
+.przycisk-media--aktywny {
+    background: rgba(124, 58, 237, 0.3);
+    border-color: var(--kolor-akcent);
+}
+
+/* Meta modeli */
+.scena-karta__modele {
+    margin-top: var(--odstep-md);
+    padding-top: var(--odstep-md);
+    border-top: 1px solid var(--kolor-obramowanie);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--odstep-sm);
+}
+
+.etykieta-modelu {
+    font-size: var(--rozmiar-xs);
+    padding: 2px var(--odstep-sm);
+    background: rgba(124, 58, 237, 0.15);
+    border-radius: var(--zaokraglenie-pelne);
+    color: var(--kolor-akcent-jasny);
+}
+
+/* Wideo w scenie */
+.scena-karta__wideo {
+    display: none;
+    margin-top: var(--odstep-md);
+}
+
+.scena-karta__wideo--aktywne {
+    display: block;
+}
+
+.scena-karta__wideo video {
+    width: 100%;
+    border-radius: var(--zaokraglenie-md);
+}
+
+@media (max-width: 640px) {
+    .scena-karta__tresc {
+        padding: var(--odstep-md);
+    }
+
+    .film-info__meta {
+        flex-direction: column;
+        align-items: center;
+    }
+}

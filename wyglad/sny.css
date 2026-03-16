@@ -1,0 +1,611 @@
+/* ══════════════════════════════════════
+   Style dla stron: Sny, Sen, Jak to działa
+   ══════════════════════════════════════ */
+
+/* ── Nagłówek mały (podstrony) ── */
+.naglowek--maly {
+    padding: var(--odstep-xl) 0 var(--odstep-lg);
+    text-align: center;
+}
+
+.naglowek__tytul--maly {
+    font-size: var(--rozmiar-2xl);
+}
+
+/* ── Lista snów — siatka kart ── */
+.sny__siatka {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--odstep-xl);
+    padding: var(--odstep-xl) 0;
+}
+
+.sny__brak {
+    text-align: center;
+    padding: var(--odstep-2xl) 0;
+    color: var(--kolor-tekst-przygaszony);
+}
+
+.sny__brak p {
+    margin-bottom: var(--odstep-md);
+    font-size: var(--rozmiar-lg);
+}
+
+.sny__link-wszystkie {
+    display: inline-block;
+    padding: var(--odstep-sm) var(--odstep-lg);
+    background: var(--gradient-przycisk);
+    border-radius: var(--zaokraglenie-pelne);
+    color: #fff;
+    font-weight: 600;
+    transition: all var(--przejscie);
+}
+
+.sny__link-wszystkie:hover {
+    background: var(--gradient-przycisk-hover);
+    text-decoration: none;
+    color: #fff;
+}
+
+/* ── Karta snu ── */
+.sen-karta {
+    background: var(--gradient-karta);
+    border: 1px solid var(--kolor-obramowanie);
+    border-radius: var(--zaokraglenie-lg);
+    overflow: hidden;
+    transition: all var(--przejscie);
+    display: flex;
+    flex-direction: column;
+}
+
+.sen-karta:hover {
+    border-color: var(--kolor-akcent);
+    box-shadow: var(--cien-akcent);
+    transform: translateY(-2px);
+}
+
+.sen-karta__link-obraz {
+    display: block;
+    text-decoration: none;
+}
+
+.sen-karta__obraz-kontener {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: var(--kolor-tlo);
+}
+
+.sen-karta__obraz {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--przejscie-wolne);
+}
+
+.sen-karta:hover .sen-karta__obraz {
+    transform: scale(1.04);
+}
+
+.sen-karta__tresc {
+    padding: var(--odstep-lg);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--odstep-sm);
+}
+
+.sen-karta__flaga {
+    font-size: var(--rozmiar-lg);
+}
+
+.sen-karta__tytul {
+    font-size: var(--rozmiar-lg);
+    font-weight: 700;
+    color: var(--kolor-tekst-naglowek);
+    line-height: 1.3;
+}
+
+.sen-karta__tytul a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--przejscie);
+}
+
+.sen-karta__tytul a:hover {
+    color: var(--kolor-akcent-jasny);
+}
+
+.sen-karta__wstep {
+    color: var(--kolor-tekst-przygaszony);
+    font-size: var(--rozmiar-sm);
+    line-height: 1.6;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.sen-karta__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--odstep-sm);
+    flex-wrap: wrap;
+}
+
+.sen-karta__meta time {
+    font-size: var(--rozmiar-xs);
+    color: var(--kolor-tekst-przygaszony);
+}
+
+.sen-karta__tag {
+    display: inline-block;
+    font-size: var(--rozmiar-xs);
+    padding: 2px var(--odstep-sm);
+    background: rgba(124, 58, 237, 0.15);
+    border: 1px solid rgba(124, 58, 237, 0.3);
+    border-radius: var(--zaokraglenie-pelne);
+    color: var(--kolor-akcent-jasny);
+}
+
+.sen-karta__tag--nastroj {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #93c5fd;
+}
+
+.sen-karta__przycisk {
+    display: inline-block;
+    align-self: flex-start;
+    margin-top: var(--odstep-sm);
+    padding: var(--odstep-sm) var(--odstep-lg);
+    background: var(--gradient-przycisk);
+    border-radius: var(--zaokraglenie-pelne);
+    color: #fff;
+    font-size: var(--rozmiar-sm);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--przejscie);
+}
+
+.sen-karta__przycisk:hover {
+    background: var(--gradient-przycisk-hover);
+    text-decoration: none;
+    color: #fff;
+    box-shadow: var(--cien-akcent);
+}
+
+/* ── Paginacja ── */
+.sny__paginacja {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--odstep-lg);
+    padding: var(--odstep-xl) 0;
+}
+
+.sny__paginacja-link {
+    padding: var(--odstep-sm) var(--odstep-lg);
+    background: var(--kolor-tlo-karta);
+    border: 1px solid var(--kolor-obramowanie);
+    border-radius: var(--zaokraglenie-md);
+    color: var(--kolor-tekst);
+    font-size: var(--rozmiar-sm);
+    text-decoration: none;
+    transition: all var(--przejscie);
+}
+
+.sny__paginacja-link:hover {
+    border-color: var(--kolor-akcent);
+    color: var(--kolor-akcent-jasny);
+    text-decoration: none;
+}
+
+.sny__paginacja-info {
+    font-size: var(--rozmiar-sm);
+    color: var(--kolor-tekst-przygaszony);
+}
+
+/* ══════════════════════════════════════
+   Strona indywidualnego snu
+   ══════════════════════════════════════ */
+
+.sen__naglowek-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--odstep-sm);
+    margin-bottom: var(--odstep-sm);
+    flex-wrap: wrap;
+}
+
+.sen__flaga {
+    font-size: var(--rozmiar-xl);
+}
+
+.sen__data {
+    display: block;
+    font-size: var(--rozmiar-sm);
+    color: var(--kolor-tekst-przygaszony);
+    text-align: center;
+    margin-top: var(--odstep-xs);
+}
+
+/* Główny obraz */
+.sen__obraz-glowny {
+    margin: var(--odstep-xl) 0;
+    border-radius: var(--zaokraglenie-lg);
+    overflow: hidden;
+    box-shadow: var(--cien-lg);
+}
+
+.sen__obraz {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Wstęp */
+.sen__wstep {
+    margin: var(--odstep-xl) 0;
+    padding: var(--odstep-xl);
+    background: var(--gradient-karta);
+    border: 1px solid var(--kolor-obramowanie);
+    border-left: 4px solid var(--kolor-akcent);
+    border-radius: var(--zaokraglenie-lg);
+}
+
+.sen__wstep-tekst {
+    font-size: var(--rozmiar-lg);
+    line-height: 1.8;
+    color: var(--kolor-tekst);
+    font-style: italic;
+}
+
+/* Film / wideo */
+.sen__film {
+    margin: var(--odstep-xl) 0;
+}
+
+.sen__sekcja-tytul {
+    font-size: var(--rozmiar-xl);
+    color: var(--kolor-tekst-naglowek);
+    margin-bottom: var(--odstep-md);
+    padding-bottom: var(--odstep-sm);
+    border-bottom: 1px solid var(--kolor-obramowanie);
+}
+
+.sen__wideo-kontener {
+    border-radius: var(--zaokraglenie-lg);
+    overflow: hidden;
+    background: var(--kolor-tlo);
+    box-shadow: var(--cien-lg);
+    aspect-ratio: 16 / 9;
+}
+
+.sen__wideo {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.sen__narracja-player {
+    padding: var(--odstep-lg);
+    background: var(--gradient-karta);
+    border: 1px solid var(--kolor-obramowanie);
+    border-radius: var(--zaokraglenie-lg);
+}
+
+.sen__audio {
+    width: 100%;
+}
+
+/* Galeria scen */
+.sen__sceny {
+    margin: var(--odstep-xl) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--odstep-xl);
+}
+
+.sen__scena-karta {
+    background: var(--gradient-karta);
+    border: 1px solid var(--kolor-obramowanie);
+    border-radius: var(--zaokraglenie-lg);
+    overflow: hidden;
+}
+
+.sen__scena-obraz-kontener {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--kolor-tlo);
+}
+
+.sen__scena-obraz {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sen__scena-tresc {
+    padding: var(--odstep-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--odstep-sm);
+}
+
+.sen__scena-tytul {
+    font-size: var(--rozmiar-lg);
+    color: var(--kolor-tekst-naglowek);
+    font-weight: 700;
+}
+
+.sen__scena-narracja {
+    font-style: italic;
+    color: var(--kolor-tekst-przygaszony);
+    line-height: 1.7;
+}
+
+.sen__scena-media {
+    display: flex;
+    flex-direction: column;
+    gap: var(--odstep-sm);
+    margin-top: var(--odstep-sm);
+}
+
+.sen__audio-maly,
+.sen__wideo-maly {
+    width: 100%;
+    border-radius: var(--zaokraglenie-sm);
+}
+
+/* Nawigacja powrót */
+.sen__nawigacja-powrot {
+    display: flex;
+    gap: var(--odstep-md);
+    flex-wrap: wrap;
+    margin: var(--odstep-xl) 0;
+    padding-top: var(--odstep-xl);
+    border-top: 1px solid var(--kolor-obramowanie);
+}
+
+.sen__powrot {
+    display: inline-block;
+    padding: var(--odstep-sm) var(--odstep-lg);
+    background: var(--kolor-tlo-karta);
+    border: 1px solid var(--kolor-obramowanie);
+    border-radius: var(--zaokraglenie-md);
+    color: var(--kolor-tekst);
+    font-size: var(--rozmiar-sm);
+    text-decoration: none;
+    transition: all var(--przejscie);
+}
+
+.sen__powrot:hover {
+    border-color: var(--kolor-akcent);
+    color: var(--kolor-akcent-jasny);
+    text-decoration: none;
+}
+
+.sen__404 {
+    text-align: center;
+}
+
+.sen__404 h1 {
+    font-size: var(--rozmiar-2xl);
+    color: var(--kolor-blad);
+    margin-bottom: var(--odstep-lg);
+}
+
+/* ══════════════════════════════════════
+   Jak to działa
+   ══════════════════════════════════════ */
+
+.jak-dziala__kroki {
+    display: flex;
+    flex-direction: column;
+    gap: var(--odstep-lg);
+}
+
+.jak-dziala__krok {
+    display: flex;
+    gap: var(--odstep-lg);
+    align-items: flex-start;
+    padding: var(--odstep-lg);
+    background: var(--gradient-karta);
+    border: 1px solid var(--kolor-obramowanie);
+    border-radius: var(--zaokraglenie-lg);
+    transition: border-color var(--przejscie);
+}
+
+.jak-dziala__krok:hover {
+    border-color: var(--kolor-akcent);
+}
+
+.jak-dziala__krok-ikona {
+    font-size: var(--rozmiar-2xl);
+    flex-shrink: 0;
+    width: 3rem;
+    text-align: center;
+    line-height: 1;
+}
+
+.jak-dziala__krok-tytul {
+    font-size: var(--rozmiar-lg);
+    font-weight: 700;
+    color: var(--kolor-tekst-naglowek);
+    margin-bottom: var(--odstep-xs);
+}
+
+.jak-dziala__krok-opis {
+    color: var(--kolor-tekst-przygaszony);
+    line-height: 1.6;
+}
+
+.jak-dziala__sekcja-tytul {
+    font-size: var(--rozmiar-xl);
+    color: var(--kolor-tekst-naglowek);
+    margin-bottom: var(--odstep-md);
+}
+
+.jak-dziala__sekcja-opis {
+    color: var(--kolor-tekst-przygaszony);
+    margin-bottom: var(--odstep-lg);
+    line-height: 1.6;
+}
+
+.jak-dziala__odznaki {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--odstep-sm);
+}
+
+/* FAQ */
+.jak-dziala__faq {
+    display: flex;
+    flex-direction: column;
+    gap: var(--odstep-sm);
+}
+
+.jak-dziala__faq-element {
+    background: var(--gradient-karta);
+    border: 1px solid var(--kolor-obramowanie);
+    border-radius: var(--zaokraglenie-md);
+    overflow: hidden;
+    transition: border-color var(--przejscie);
+}
+
+.jak-dziala__faq-element[open] {
+    border-color: var(--kolor-akcent);
+}
+
+.jak-dziala__faq-pytanie {
+    padding: var(--odstep-md) var(--odstep-lg);
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--kolor-tekst-naglowek);
+    list-style: none;
+    user-select: none;
+    transition: color var(--przejscie);
+}
+
+.jak-dziala__faq-pytanie::-webkit-details-marker { display: none; }
+.jak-dziala__faq-pytanie::before {
+    content: '+ ';
+    color: var(--kolor-akcent-jasny);
+}
+
+details[open] .jak-dziala__faq-pytanie::before {
+    content: '− ';
+}
+
+.jak-dziala__faq-odpowiedz {
+    padding: 0 var(--odstep-lg) var(--odstep-md);
+    color: var(--kolor-tekst-przygaszony);
+    line-height: 1.6;
+}
+
+/* CTA */
+.jak-dziala__cta {
+    text-align: center;
+    padding: var(--odstep-2xl) 0;
+}
+
+.jak-dziala__przycisk {
+    display: inline-block;
+    padding: var(--odstep-md) var(--odstep-2xl);
+    font-size: var(--rozmiar-lg);
+    font-weight: 700;
+    background: var(--gradient-przycisk);
+    border-radius: var(--zaokraglenie-pelne);
+    color: #fff;
+    text-decoration: none;
+    transition: all var(--przejscie);
+    box-shadow: var(--cien-md);
+}
+
+.jak-dziala__przycisk:hover {
+    background: var(--gradient-przycisk-hover);
+    box-shadow: var(--cien-akcent);
+    text-decoration: none;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* ── Link do snu po generacji ── */
+.film-info__link-snu {
+    display: inline-block;
+    margin-top: var(--odstep-sm);
+    padding: var(--odstep-xs) var(--odstep-md);
+    background: rgba(124, 58, 237, 0.15);
+    border: 1px solid var(--kolor-akcent);
+    border-radius: var(--zaokraglenie-pelne);
+    color: var(--kolor-akcent-jasny);
+    font-size: var(--rozmiar-sm);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--przejscie);
+    animation: pulsAkcent 2s ease-in-out infinite;
+}
+
+.film-info__link-snu:hover {
+    background: rgba(124, 58, 237, 0.3);
+    text-decoration: none;
+    color: #fff;
+}
+
+@keyframes pulsAkcent {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); }
+    50%       { box-shadow: 0 0 0 6px rgba(124, 58, 237, 0); }
+}
+
+/* ── Aktywny link nawigacji ── */
+.nawigacja__link--aktywna {
+    color: var(--kolor-akcent-jasny);
+    background: rgba(124, 58, 237, 0.1);
+}
+
+/* ── Logo jako link ── */
+a.nawigacja__logo {
+    text-decoration: none;
+    color: var(--kolor-tekst-naglowek);
+    transition: color var(--przejscie);
+}
+
+a.nawigacja__logo:hover {
+    color: var(--kolor-akcent-jasny);
+    text-decoration: none;
+}
+
+/* ── RWD ── */
+@media (max-width: 768px) {
+    .sny__siatka {
+        grid-template-columns: 1fr;
+    }
+
+    .jak-dziala__krok {
+        flex-direction: column;
+        gap: var(--odstep-sm);
+    }
+
+    .jak-dziala__krok-ikona {
+        width: auto;
+    }
+
+    .sen__nawigacja-powrot {
+        flex-direction: column;
+    }
+
+    .sny__paginacja {
+        flex-direction: column;
+        gap: var(--odstep-sm);
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .sny__siatka {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

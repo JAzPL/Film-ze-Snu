@@ -1,0 +1,164 @@
+/* ══════════════════════════════════════
+   Odtwarzacz filmu — pokaz slajdow z dzwiekiem
+   ══════════════════════════════════════ */
+
+.odtwarzacz {
+    display: none;
+    margin-top: var(--odstep-xl);
+}
+
+.odtwarzacz--aktywny {
+    display: block;
+}
+
+.odtwarzacz__kontener {
+    background: #000;
+    border-radius: var(--zaokraglenie-xl);
+    overflow: hidden;
+    position: relative;
+    box-shadow: var(--cien-lg);
+}
+
+.odtwarzacz__ekran {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #000;
+}
+
+.odtwarzacz__obraz {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+.odtwarzacz__obraz--aktywny {
+    opacity: 1;
+}
+
+.odtwarzacz__wideo-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.odtwarzacz__wideo-element--aktywny {
+    opacity: 1;
+}
+
+/* Nakladka z tytulem sceny */
+.odtwarzacz__nakladka {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    padding: var(--odstep-xl) var(--odstep-lg) var(--odstep-lg);
+    opacity: 0;
+    transition: opacity var(--przejscie);
+}
+
+.odtwarzacz__kontener:hover .odtwarzacz__nakladka {
+    opacity: 1;
+}
+
+.odtwarzacz__tytul-sceny {
+    font-size: var(--rozmiar-lg);
+    font-weight: 700;
+    color: white;
+    margin-bottom: var(--odstep-xs);
+}
+
+.odtwarzacz__narracja-tekst {
+    font-size: var(--rozmiar-sm);
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+}
+
+/* Kontrolki */
+.odtwarzacz__kontrolki {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--odstep-md);
+    padding: var(--odstep-md) var(--odstep-lg);
+    background: var(--kolor-tlo-karta);
+}
+
+.odtwarzacz__przycisk {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--odstep-xs);
+    padding: var(--odstep-sm) var(--odstep-lg);
+    background: transparent;
+    border: 1px solid var(--kolor-obramowanie);
+    border-radius: var(--zaokraglenie-pelne);
+    color: var(--kolor-tekst);
+    font-family: var(--czcionka-glowna);
+    font-size: var(--rozmiar-sm);
+    cursor: pointer;
+    transition: all var(--przejscie);
+}
+
+.odtwarzacz__przycisk:hover {
+    border-color: var(--kolor-akcent);
+    background: rgba(124, 58, 237, 0.15);
+}
+
+.odtwarzacz__przycisk--glowny {
+    background: var(--gradient-przycisk);
+    border-color: transparent;
+    font-weight: 600;
+    padding: var(--odstep-sm) var(--odstep-xl);
+}
+
+.odtwarzacz__przycisk--glowny:hover {
+    background: var(--gradient-przycisk-hover);
+}
+
+/* Wskaznik sceny */
+.odtwarzacz__wskaznik {
+    display: flex;
+    justify-content: center;
+    gap: var(--odstep-sm);
+    padding: var(--odstep-sm);
+}
+
+.odtwarzacz__kropka {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--kolor-obramowanie);
+    transition: all var(--przejscie);
+    cursor: pointer;
+    border: none;
+}
+
+.odtwarzacz__kropka--aktywna {
+    background: var(--kolor-akcent);
+    box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+    transform: scale(1.3);
+}
+
+@media (max-width: 640px) {
+    .odtwarzacz__kontrolki {
+        flex-wrap: wrap;
+        gap: var(--odstep-sm);
+    }
+
+    .odtwarzacz__przycisk {
+        font-size: var(--rozmiar-xs);
+        padding: var(--odstep-xs) var(--odstep-md);
+    }
+}

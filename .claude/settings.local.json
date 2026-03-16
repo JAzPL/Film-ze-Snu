@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:enter.pollinations.ai)",
+      "WebFetch(domain:pollinations.ai)",
+      "WebFetch(domain:text.pollinations.ai)",
+      "WebFetch(domain:image.pollinations.ai)",
+      "WebFetch(domain:gen.pollinations.ai)",
+      "WebFetch(domain:audio.pollinations.ai)",
+      "Bash(mkdir:*)",
+      "Bash(php:*)"
+    ]
+  }
+}

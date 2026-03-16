@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /konfiguracja/
+Disallow: /klasy/
+Disallow: /projekty/
+
+Sitemap: https://twoja-domena.pl/sitemap.xml

@@ -1,0 +1,39 @@
+/* ══════════════════════════════════════
+   Stopka strony
+   ══════════════════════════════════════ */
+
+.stopka {
+    margin-top: var(--odstep-2xl);
+    padding: var(--odstep-xl) 0;
+    border-top: 1px solid var(--kolor-obramowanie);
+    text-align: center;
+}
+
+.stopka__tekst {
+    font-size: var(--rozmiar-sm);
+    color: var(--kolor-tekst-przygaszony);
+    margin-bottom: var(--odstep-sm);
+}
+
+.stopka__prawa {
+    font-size: var(--rozmiar-xs);
+    color: var(--kolor-tekst-przygaszony);
+    opacity: 0.7;
+}
+
+.stopka__technologie {
+    margin-top: var(--odstep-md);
+    display: flex;
+    justify-content: center;
+    gap: var(--odstep-md);
+    flex-wrap: wrap;
+}
+
+.stopka__tech-badge {
+    font-size: var(--rozmiar-xs);
+    padding: 2px var(--odstep-sm);
+    background: rgba(124, 58, 237, 0.1);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+    border-radius: var(--zaokraglenie-pelne);
+    color: var(--kolor-akcent-jasny);
+}

@@ -1,0 +1,68 @@
+/* ══════════════════════════════════════
+   Zmienne CSS — paleta kolorow i typografia
+   ══════════════════════════════════════ */
+
+:root {
+    /* Kolory glowne */
+    --kolor-tlo: #0a0a1a;
+    --kolor-tlo-karta: #12122a;
+    --kolor-tlo-karta-aktywna: #1a1a3e;
+    --kolor-akcent: #7c3aed;
+    --kolor-akcent-jasny: #a78bfa;
+    --kolor-akcent-ciemny: #5b21b6;
+    --kolor-tekst: #e2e8f0;
+    --kolor-tekst-przygaszony: #94a3b8;
+    --kolor-tekst-naglowek: #f8fafc;
+    --kolor-sukces: #10b981;
+    --kolor-blad: #ef4444;
+    --kolor-ostrzezenie: #f59e0b;
+    --kolor-info: #3b82f6;
+    --kolor-obramowanie: #1e293b;
+    --kolor-obramowanie-aktywne: #7c3aed;
+
+    /* Gradient tla */
+    --gradient-sen: linear-gradient(135deg, #0a0a1a 0%, #1a0533 50%, #0a1628 100%);
+    --gradient-przycisk: linear-gradient(135deg, #7c3aed, #2563eb);
+    --gradient-przycisk-hover: linear-gradient(135deg, #6d28d9, #1d4ed8);
+    --gradient-karta: linear-gradient(145deg, #12122a, #1a1a3e);
+
+    /* Typografia */
+    --czcionka-glowna: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --czcionka-mono: 'Cascadia Code', 'Fira Code', monospace;
+    --rozmiar-xs: 0.75rem;
+    --rozmiar-sm: 0.875rem;
+    --rozmiar-md: 1rem;
+    --rozmiar-lg: 1.25rem;
+    --rozmiar-xl: 1.5rem;
+    --rozmiar-2xl: 2rem;
+    --rozmiar-3xl: 2.5rem;
+
+    /* Odstepy */
+    --odstep-xs: 0.25rem;
+    --odstep-sm: 0.5rem;
+    --odstep-md: 1rem;
+    --odstep-lg: 1.5rem;
+    --odstep-xl: 2rem;
+    --odstep-2xl: 3rem;
+
+    /* Zaokraglenia */
+    --zaokraglenie-sm: 0.375rem;
+    --zaokraglenie-md: 0.75rem;
+    --zaokraglenie-lg: 1rem;
+    --zaokraglenie-xl: 1.5rem;
+    --zaokraglenie-pelne: 9999px;
+
+    /* Cienie */
+    --cien-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --cien-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --cien-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+    --cien-akcent: 0 0 20px rgba(124, 58, 237, 0.3);
+
+    /* Animacje */
+    --przejscie: 0.3s ease;
+    --przejscie-wolne: 0.6s ease;
+
+    /* Szerokosci */
+    --szerokosc-maks: 1200px;
+    --szerokosc-maks-waski: 800px;
+}

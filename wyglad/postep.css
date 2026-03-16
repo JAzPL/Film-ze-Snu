@@ -1,0 +1,126 @@
+/* ══════════════════════════════════════
+   Pasek postepu generowania
+   ══════════════════════════════════════ */
+
+.postep {
+    display: none;
+    margin-top: var(--odstep-xl);
+}
+
+.postep--aktywny {
+    display: block;
+    animation: pokaz 0.4s ease;
+}
+
+@keyframes pokaz {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.postep__karta {
+    background: var(--gradient-karta);
+    border: 1px solid var(--kolor-obramowanie);
+    border-radius: var(--zaokraglenie-xl);
+    padding: var(--odstep-xl);
+    box-shadow: var(--cien-lg);
+}
+
+.postep__tytul {
+    font-size: var(--rozmiar-xl);
+    font-weight: 700;
+    color: var(--kolor-tekst-naglowek);
+    margin-bottom: var(--odstep-sm);
+    text-align: center;
+}
+
+.postep__podtytul {
+    text-align: center;
+    color: var(--kolor-tekst-przygaszony);
+    font-size: var(--rozmiar-sm);
+    margin-bottom: var(--odstep-lg);
+}
+
+/* Pasek */
+.postep__pasek-kontener {
+    width: 100%;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--zaokraglenie-pelne);
+    overflow: hidden;
+    margin-bottom: var(--odstep-lg);
+}
+
+.postep__pasek {
+    height: 100%;
+    background: var(--gradient-przycisk);
+    border-radius: var(--zaokraglenie-pelne);
+    transition: width 0.5s ease;
+    width: 0%;
+    position: relative;
+}
+
+.postep__pasek::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: blask 2s infinite;
+}
+
+@keyframes blask {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.postep__procent {
+    text-align: center;
+    font-size: var(--rozmiar-lg);
+    font-weight: 700;
+    color: var(--kolor-akcent-jasny);
+    margin-bottom: var(--odstep-sm);
+}
+
+/* Logi krokow */
+.postep__logi {
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: var(--odstep-md);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--zaokraglenie-md);
+}
+
+.postep__log {
+    font-size: var(--rozmiar-sm);
+    padding: var(--odstep-xs) 0;
+    color: var(--kolor-tekst-przygaszony);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    animation: nowyLog 0.3s ease;
+}
+
+@keyframes nowyLog {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.postep__log:last-child {
+    color: var(--kolor-tekst);
+    font-weight: 500;
+    border-bottom: none;
+}
+
+.postep__log--sukces {
+    color: var(--kolor-sukces);
+}
+
+.postep__log--blad {
+    color: var(--kolor-blad);
+}
