@@ -298,8 +298,10 @@ class GeneratorFilmu
             }
         }
 
-        // Zapisz wideo sceny 1 (jesli istnieje)
-        $zrodloFilm = $this->katalogProjektu . '/wideo/scena_1.mp4';
+        // Zapisz film finalny (montaz) lub wideo sceny 1 jako fallback
+        $zrodloFilm = file_exists($this->katalogProjektu . '/film_final.mp4')
+            ? $this->katalogProjektu . '/film_final.mp4'
+            : $this->katalogProjektu . '/wideo/scena_1.mp4';
         $urlFilm    = null;
 
         if (file_exists($zrodloFilm)) {
@@ -403,6 +405,141 @@ class GeneratorFilmu
         $wynik = imagewebp($im, $cel, 85);
         imagedestroy($im);
         return $wynik;
+    }
+
+    /**
+     * KROK 6: Montaz finalnego filmu ze wszystkich scen
+     * Laczy obrazy/wideo + narracje + muzyke kazdej sceny w jeden plik MP4.
+     */
+    public function montujFilm(): array
+    {
+        // Sprawdz dostepnosc FFmpeg
+        $ffmpeg = trim((string) shell_exec('which ffmpeg 2>/dev/null'));
+        if (empty($ffmpeg)) {
+            $ffmpeg = trim((string) shell_exec('where ffmpeg 2>nul'));
+        }
+        if (empty($ffmpeg)) {
+            throw new RuntimeException('FFmpeg nie jest dostepny na serwerze. Zainstaluj ffmpeg aby wlaczyc montaz.');
+        }
+
+        // Rozszerz limit czasu PHP — montaz moze trwac kilka minut
+        set_time_limit(600);
+
+        $katalog     = $this->katalogProjektu;
+        $tempKatalog = $katalog . '/temp';
+        if (!is_dir($tempKatalog)) {
+            mkdir($tempKatalog, 0755, true);
+        }
+
+        $vf = 'scale=1280:720:force_original_aspect_ratio=decrease,'
+            . 'pad=1280:720:(ow-iw)/2:(oh-ih)/2,setsar=1';
+
+        $scenePliki = [];
+
+        for ($i = 1; $i <= 4; $i++) {
+            $obraz    = $katalog . "/obrazy/scena_{$i}.jpg";
+            $narracja = $katalog . "/narracja/scena_{$i}.mp3";
+            $muzyka   = $katalog . "/muzyka/scena_{$i}.mp3";
+            $wideo    = $katalog . "/wideo/scena_{$i}.mp4";
+            $wynik    = $tempKatalog . "/scena_{$i}.mp4";
+
+            if (!file_exists($narracja)) {
+                continue; // scena bez narracji — pomijamy
+            }
+
+            $maWideo  = file_exists($wideo);
+            $maMuzyke = file_exists($muzyka);
+
+            // Mieszanie audio: narracja (100%) + muzyka (25%); czas = czas narracji
+            $audioFilter = $maMuzyke
+                ? '[1:a][2:a]amix=inputs=2:weights=1 0.25:duration=first[a]'
+                : '[1:a]anull[a]';
+
+            if ($maWideo) {
+                // Scena z klipem wideo — petlowany az do konca narracji
+                $cmd = sprintf(
+                    '%s -y -stream_loop -1 -i %s -i %s' . ($maMuzyke ? ' -i %s' : '%s') . ' '
+                    . '-filter_complex "%s" '
+                    . '-map 0:v -map "[a]" '
+                    . '-c:v libx264 -preset fast -crf 22 -r 25 -vf %s '
+                    . '-c:a aac -b:a 128k -shortest '
+                    . '%s 2>&1',
+                    escapeshellarg($ffmpeg),
+                    escapeshellarg($wideo),
+                    escapeshellarg($narracja),
+                    $maMuzyke ? escapeshellarg($muzyka) : '',
+                    $audioFilter,
+                    escapeshellarg($vf),
+                    escapeshellarg($wynik)
+                );
+            } else {
+                // Scena tylko z obrazem — tworzy slideshow
+                $cmd = sprintf(
+                    '%s -y -loop 1 -i %s -i %s' . ($maMuzyke ? ' -i %s' : '%s') . ' '
+                    . '-filter_complex "%s" '
+                    . '-map 0:v -map "[a]" '
+                    . '-c:v libx264 -preset fast -crf 22 -r 25 -vf %s '
+                    . '-c:a aac -b:a 128k -shortest '
+                    . '%s 2>&1',
+                    escapeshellarg($ffmpeg),
+                    escapeshellarg($obraz),
+                    escapeshellarg($narracja),
+                    $maMuzyke ? escapeshellarg($muzyka) : '',
+                    $audioFilter,
+                    escapeshellarg($vf),
+                    escapeshellarg($wynik)
+                );
+            }
+
+            exec($cmd, $output, $exitCode);
+
+            if ($exitCode !== 0 || !file_exists($wynik)) {
+                throw new RuntimeException(
+                    "Blad montazu sceny {$i}: " . implode(' | ', array_slice($output, -3))
+                );
+            }
+
+            $scenePliki[] = $wynik;
+        }
+
+        if (empty($scenePliki)) {
+            throw new RuntimeException('Brak scen do montazu');
+        }
+
+        // Plik listy dla FFmpeg concat
+        $listaSciezka = $tempKatalog . '/lista.txt';
+        file_put_contents(
+            $listaSciezka,
+            implode("\n", array_map(fn($p) => "file '" . str_replace("'", "'\\''", $p) . "'", $scenePliki))
+        );
+
+        $filmFinalny = $katalog . '/film_final.mp4';
+
+        $cmd = sprintf(
+            '%s -y -f concat -safe 0 -i %s -c copy %s 2>&1',
+            escapeshellarg($ffmpeg),
+            escapeshellarg($listaSciezka),
+            escapeshellarg($filmFinalny)
+        );
+
+        exec($cmd, $output, $exitCode);
+
+        // Sprzatanie temp
+        foreach (glob($tempKatalog . '/*') as $plik) {
+            unlink($plik);
+        }
+        rmdir($tempKatalog);
+
+        if ($exitCode !== 0 || !file_exists($filmFinalny)) {
+            throw new RuntimeException(
+                'Blad laczenia scen: ' . implode(' | ', array_slice($output, -3))
+            );
+        }
+
+        return [
+            'plik'    => 'film_final.mp4',
+            'rozmiar' => filesize($filmFinalny),
+        ];
     }
 
     /**
