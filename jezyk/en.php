@@ -53,6 +53,7 @@ return [
         'narracja'     => '🎤 Recording narration for scene {numer}...',
         'muzyka'       => '🎵 Composing music for scene {numer}...',
         'wideo'        => '🎬 Rendering video for scene {numer}...',
+        'montaz'       => '🎞️ Assembling final film...',
         'zapisz'       => '💾 Saving dream to archive...',
         'gotowe'       => '✅ Film is ready!',
         'blad'         => '❌ An error occurred: {komunikat}',
