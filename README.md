@@ -4,36 +4,36 @@ Film ze Snu is a fully multilingual web application written in PHP that transfor
 <br><br>
 Open konfiguracja/klucz_api.php and insert your API key:
 <br><br>
-konfiguracja/klucz_api.php
-<?php
-return [
-    'klucz'    => 'sk_TWOJ_KLUCZ_API_TUTAJ', // API Pollinations
-    'baza_url' => 'https://gen.pollinations.ai',
+konfiguracja/klucz_api.php<br>
+<?php<br>
+return [<br>
+    'klucz'    => 'sk_TWOJ_KLUCZ_API_TUTAJ', // API Pollinations<br>
+    'baza_url' => 'https://gen.pollinations.ai',<br>
 ];
 <br><br>
-Folder permissions
+Folder permissions<br>
 The projekty/ folder must be writable by the web server:
 <br><br>
-bash
-mkdir -p projekty
-chmod 755 projekty
-# Lub na niektorych serwerach:
-chmod 777 projekty
+
+mkdir -p projekty<br>
+chmod 755 projekty<br>
+# Lub na niektorych serwerach:<br>
+chmod 777 projekty<br>
 <br><br>
 <br>
 Server configuration<br>
 Apache: ensure mod_rewrite is enabled and AllowOverride All is set for the directory.
 <br><br>
-.htaccess (Apache)
-# Wymagane dla mod_rewrite
+.htaccess (Apache)<br>
+# Wymagane dla mod_rewrite<br>
 Options -Indexes<br>
 AllowOverride All<br>
 Nginx: add try_files $uri $uri/ /index.php?$query_string; to your vhost configuration.
 <br><br>
-nginx.conf
-location / {
-    try_files $uri $uri/ /index.php?$query_string;
-}
+nginx.conf<br>
+location / {<br>
+    try_files $uri $uri/ /index.php?$query_string;<br>
+}<br>
 
 
 
